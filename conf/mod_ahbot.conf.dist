@@ -74,12 +74,12 @@ AuctionHouseBot.DEBUG = false
 AuctionHouseBot.DEBUG_FILTERS = false
 AuctionHouseBot.MinutesBetweenBuyCycle = 1
 AuctionHouseBot.MinutesBetweenSellCycle = 1
-AuctionHouseBot.EnableSeller = false
+AuctionHouseBot.EnableSeller = true
 AuctionHouseBot.ReturnExpiredAuctionItemsToBot = false
-AuctionHouseBot.GUIDs = 0
+AuctionHouseBot.GUIDs = 5
 AuctionHouseBot.ItemsPerCycle = 150
 AuctionHouseBot.ListingExpireTimeInSecondsMin = 900
-AuctionHouseBot.ListingExpireTimeInSecondsMax = 86400
+AuctionHouseBot.ListingExpireTimeInSecondsMax = 172800
 
 ###############################################################################
 #    AuctionHouseBot.MaxBuyoutPriceInCopper
@@ -210,12 +210,12 @@ AuctionHouseBot.Neutral.MaxItems = 15000
 #    Default: false
 ###############################################################################
 
-AuctionHouseBot.Buyer.Enabled = false
-AuctionHouseBot.Buyer.BuyCandidatesPerBuyCycle = 1
+AuctionHouseBot.Buyer.Enabled = true
+AuctionHouseBot.Buyer.BuyCandidatesPerBuyCycle = 1:5
 AuctionHouseBot.Buyer.AcceptablePriceModifier = 1
 AuctionHouseBot.Buyer.AlwaysBidMaxCalculatedPrice = false
 AuctionHouseBot.Buyer.PreventOverpayingForVendorItems = true
-AuctionHouseBot.Buyer.BidAgainstPlayers = false
+AuctionHouseBot.Buyer.BidAgainstPlayers = true
 
 ###############################################################################
 #    AuctionHouseBot.ListProportion.Category*.Quality*
@@ -247,10 +247,10 @@ AuctionHouseBot.Buyer.BidAgainstPlayers = false
 ###############################################################################
 
 AuctionHouseBot.ListProportion.CategoryConsumable.QualityPoor = 0
-AuctionHouseBot.ListProportion.CategoryConsumable.QualityNormal = 50
+AuctionHouseBot.ListProportion.CategoryConsumable.QualityNormal = 45
 AuctionHouseBot.ListProportion.CategoryConsumable.QualityUncommon = 10
 AuctionHouseBot.ListProportion.CategoryConsumable.QualityRare = 5
-AuctionHouseBot.ListProportion.CategoryConsumable.QualityEpic = 0
+AuctionHouseBot.ListProportion.CategoryConsumable.QualityEpic = 1
 AuctionHouseBot.ListProportion.CategoryConsumable.QualityLegendary = 0
 AuctionHouseBot.ListProportion.CategoryConsumable.QualityArtifact = 0
 AuctionHouseBot.ListProportion.CategoryConsumable.QualityHeirloom = 0
