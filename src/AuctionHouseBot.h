@@ -278,6 +278,19 @@ private:
     uint32 ListedItemIDMax;
     std::set<uint32> ListedItemIDExceptionItems;
     bool PreventOverpayingForVendorItems;
+    std::unordered_map<uint32, double> CachedItemDropRates;
+    std::vector<std::vector<std::vector<std::vector<uint32>>>> ItemTiersByClassAndQuality;  // [Classes][Qualities][Tiers] .. [17][7][configurable]
+    std::map<double, int, std::greater<double>> DropRatesToTierMap;
+    std::set<uint32> AdvancedListingRuleUseDropRatesExceptionItems;
+    bool AdvancedListingRuleUseDropRatesEnabled;
+    bool AdvancedListingRuleUseDropRatesWeaponEnabled;
+    bool AdvancedListingRuleUseDropRatesArmorEnabled;
+    bool AdvancedListingRuleUseDropRatesRecipeEnabled;
+    std::set<uint32> AdvancedListingRuleUseDropRatesWeaponAffectedQualities;
+    std::set<uint32> AdvancedListingRuleUseDropRatesArmorAffectedQualities;
+    std::set<uint32> AdvancedListingRuleUseDropRatesRecipeAffectedQualities;
+    float AdvancedListingRuleUseDropRatesMinDropRate;
+    std::unordered_set<uint32> QuestRewardItemIDs;
 
     FactionSpecificAuctionHouseConfig AllianceConfig;
     FactionSpecificAuctionHouseConfig HordeConfig;
@@ -308,12 +321,22 @@ public:
     void SetBuyingBotBuyCandidatesPerBuyCycle();
     void GetConfigMinAndMax(std::string config, uint32& min, uint32& max);
     void AddCharacters(std::string characterGUIDString);
-    void AddItemIDsFromString(std::set<uint32>& workingItemIDSet, std::string itemString, const char* parentOperationName);
-    void AddToItemIDSet(std::set<uint32>& workingItemIDSet, uint32 itemID, const char* parentOperationName);
+    void ParseNumberListToSet(std::set<uint32>& workingItemIDSet, std::string itemString, const char* parentOperationName);
+    void AddToNumberListSet(std::set<uint32>& workingItemIDSet, uint32 itemID, const char* parentOperationName);
     const char* GetQualityName(ItemQualities quality);
     const char* GetCategoryName(ItemClass category);
     uint32 GetStackSizeForItem(ItemTemplate const* itemProto) const;
     void CalculateItemValue(ItemTemplate const* itemProto, uint64& outBidPrice, uint64& outBuyoutPrice);
+    void PopulateItemDropChances();
+    void PopulateItemDropChancesForCategoryAndQuality(ItemClass category, std::string qualities);
+    void InitializeAdvancedListingRuleUseDropRatesTiers();
+    void PopulateQuestRewardItemIDs();
+    bool IsItemQuestReward(uint32 itemID);
+    bool IsItemCrafted(uint32 itemID);
+    bool IsItemCategoryQualityInDBDropRatesConfig(ItemTemplate const* proto);
+    bool IsItemEligibleForDBDropRates(ItemTemplate const* proto);
+    bool HandleAdvancedListingRuleUseDropRates(ItemTemplate const*& proto);
+    int GetItemDropChanceTier(double dropRate);
     float GetAdvancedPricingMultiplier(ItemTemplate const* itemProto);
     ItemTemplate const* GetProducedItemFromRecipe(ItemTemplate const* recipeItemTemplate);
     std::unordered_set<uint32> GetItemIDsProducedByRecipes();

@@ -82,6 +82,70 @@ AuctionHouseBot.ListingExpireTimeInSecondsMin = 900
 AuctionHouseBot.ListingExpireTimeInSecondsMax = 172800
 
 ###############################################################################
+#    AuctionHouseBot.AdvancedListingRules.UseDropRates.Enabled
+#        Enable/Disable the Seller using items' in-game drop rates from Enemies
+#        and GameObjects to determine the probability of listing them on the AH.
+#        This makes rare items appear less frequently on the AH.
+#        How it works: Each time an enabled item Category/Quality is selected to post an auction,
+#        a number is rolled between 0-100. Based on this roll, a Tier is chosen based on
+#        UseDropRates.TiersConfig, then a random item from that rarity tier is listed on the AH.
+#        This setting respects ListProportion config. It can also result in more duplicate
+#        items appearing on the AH due to higher-drop-rate items being selected more often.
+#        Crafted items may also appear more often since their drop rate is effectively 100%.
+#    Default: false (disabled)
+#
+#    AuctionHouseBot.AdvancedListingRules.UseDropRates.<Category>
+#        Toggle AdvancedListingRules.UseDropRates behavior for individual category.
+#        Only applied if AdvancedListingRules.UseDropRates.Enabled is true.
+#    Default: true (enabled)
+#
+#    AuctionHouseBot.AdvancedListingRules.UseDropRates.<Category>.AffectedQualities
+#        The qualities that should be affected by AdvancedListingRules.UseDropRates.
+#        Value should be a string of comma separated numbers corresponding to the desired qualities.
+#        Examples: Setting to 2,3,5 will apply to Uncommon, Rare, and Legendary.
+#          Setting to 4 will apply only to Epic.
+#        (0) Poor, (1) Common, (2) Uncommon, (3) Rare, (4) Epic, (5) Legendary, (6) Heirloom
+#    Default: 2,3,4,5
+#
+#    AuctionHouseBot.AdvancedListingRules.UseDropRates.MinDropRate
+#        The minimum drop rate any affected item can have.
+#        Some items can have extremely low drop rates in the DB (e.g. 0.00006), so
+#        this setting will raise those items' drop rate to this value.
+#    Default: 0.005
+#
+#    AuctionHouseBot.AdvancedListingRules.UseDropRates.TiersConfig
+#        The thresholds that define item drop rate tiers.
+#        Value should be a string of comma-separated numbers between 0 and 100.
+#        Each number creates a tier for items whose drop rate falls within that range.
+#        The order of numbers in the string does not need to be sorted; they will be
+#        interpreted in descending order. However, you may find it easier to read when sorted.
+#        Whitespace is also ignored.
+#        Example: Setting to 50,10,5 will create 3 tiers:
+#          - 50–100%: items with drop rate 50% or higher
+#          - 10–50%: items with drop rate between 10% and 50%
+#          - 0–5%: items with drop rate 0–5%
+#    Default: 50, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.005
+#
+#    AuctionHouseBot.AdvancedListingRules.UseDropRates.DisabledItemIDs
+#        Comma separated list of itemIDs to exclude from having its drop rate influence its AH availability
+#        Ranges using a dash (-) can also be used.
+###############################################################################
+
+AuctionHouseBot.AdvancedListingRules.UseDropRates.Enabled = false
+
+AuctionHouseBot.AdvancedListingRules.UseDropRates.Weapon = true
+AuctionHouseBot.AdvancedListingRules.UseDropRates.Armor  = true
+AuctionHouseBot.AdvancedListingRules.UseDropRates.Recipe = true
+
+AuctionHouseBot.AdvancedListingRules.UseDropRates.Weapon.AffectedQualities = 2,3,4,5
+AuctionHouseBot.AdvancedListingRules.UseDropRates.Armor.AffectedQualities  = 2,3,4,5
+AuctionHouseBot.AdvancedListingRules.UseDropRates.Recipe.AffectedQualities = 2,3,4,5
+
+AuctionHouseBot.AdvancedListingRules.UseDropRates.MinDropRate = 0.005
+AuctionHouseBot.AdvancedListingRules.UseDropRates.TiersConfig = 50, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.005
+AuctionHouseBot.AdvancedListingRules.UseDropRates.DisabledItemIDs = 
+
+###############################################################################
 #    AuctionHouseBot.MaxBuyoutPriceInCopper
 #        Maximum amount that a buyout on a listing can be in copper.  Prevents
 #        overflow.  Don't increase this, but you can decrease it.

@@ -25,6 +25,12 @@ public:
         {
             LOG_INFO("server.loading", "AuctionHouseBot: (Re)populating item candidate lists ...");
             auctionbot->PopulateItemCandidatesAndProportions();
+
+            if (sConfigMgr->GetOption<bool>("AuctionHouseBot.AdvancedListingRules.UseDropRates.Enabled", true))
+            {
+                auctionbot->PopulateQuestRewardItemIDs();
+                auctionbot->PopulateItemDropChances();
+            }
         }
     }
 
@@ -32,6 +38,11 @@ public:
     {
         LOG_INFO("server.loading", "AuctionHouseBot: (Re)populating item candidate lists ...");
         auctionbot->PopulateItemCandidatesAndProportions();
+        if (sConfigMgr->GetOption<bool>("AuctionHouseBot.AdvancedListingRules.UseDropRates.Enabled", true))
+        {
+            auctionbot->PopulateQuestRewardItemIDs();
+            auctionbot->PopulateItemDropChances();
+        }
         HasPerformedStartup = true;
     }
 };
@@ -158,6 +169,8 @@ public:
         LOG_INFO("module", "AuctionHouseBot: Updating Auction House...");
         handler->PSendSysMessage("AuctionHouseBot: Updating Auction House...");
         AuctionHouseBot::instance()->Update();
+        LOG_INFO("module", "AuctionHouseBot: Auction House Updated.");
+        handler->PSendSysMessage("AuctionHouseBot: Auction House Updated.");
         return true;
     }
 
@@ -170,6 +183,15 @@ public:
         sConfigMgr->LoadModulesConfigs(true, false);
         AuctionHouseBot::instance()->InitializeConfiguration();
         AuctionHouseBot::instance()->PopulateItemCandidatesAndProportions();
+
+        if (sConfigMgr->GetOption<bool>("AuctionHouseBot.AdvancedListingRules.UseDropRates.Enabled", true))
+        {
+            auctionbot->PopulateQuestRewardItemIDs();
+            auctionbot->PopulateItemDropChances();
+        }
+
+        LOG_INFO("module", "AuctionHouseBot: Config reloaded.");
+        handler->PSendSysMessage("AuctionHouseBot: Config reloaded.");        
         return true;
     }
 
@@ -178,6 +200,9 @@ public:
         LOG_INFO("module", "AuctionHouseBot: Emptying Auction House...");
         handler->PSendSysMessage("AuctionHouseBot: Emptying Auction House...");
         AuctionHouseBot::instance()->EmptyAuctionHouses();
+        AuctionHouseBot::instance()->CleanupExpiredAuctionItems(); // Must go after EmptyAuctionHouses()
+        LOG_INFO("module", "AuctionHouseBot: Auction Houses Emptied.");
+        handler->PSendSysMessage("AuctionHouseBot: Auction Houses Emptied.");
         return true;
     }
 
