@@ -76,8 +76,8 @@ AuctionHouseBot.MinutesBetweenBuyCycle = 1
 AuctionHouseBot.MinutesBetweenSellCycle = 1
 AuctionHouseBot.EnableSeller = true
 AuctionHouseBot.ReturnExpiredAuctionItemsToBot = false
-AuctionHouseBot.GUIDs = 5
-AuctionHouseBot.ItemsPerCycle = 150
+AuctionHouseBot.GUIDs = 0
+AuctionHouseBot.ItemsPerCycle = 10
 AuctionHouseBot.ListingExpireTimeInSecondsMin = 900
 AuctionHouseBot.ListingExpireTimeInSecondsMax = 172800
 
@@ -275,7 +275,7 @@ AuctionHouseBot.Neutral.MaxItems = 15000
 ###############################################################################
 
 AuctionHouseBot.Buyer.Enabled = true
-AuctionHouseBot.Buyer.BuyCandidatesPerBuyCycle = 1:5
+AuctionHouseBot.Buyer.BuyCandidatesPerBuyCycle = 1
 AuctionHouseBot.Buyer.AcceptablePriceModifier = 1
 AuctionHouseBot.Buyer.AlwaysBidMaxCalculatedPrice = false
 AuctionHouseBot.Buyer.PreventOverpayingForVendorItems = true
