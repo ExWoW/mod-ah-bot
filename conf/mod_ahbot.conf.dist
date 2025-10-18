@@ -72,8 +72,8 @@
 
 AuctionHouseBot.DEBUG = false
 AuctionHouseBot.DEBUG_FILTERS = false
-AuctionHouseBot.MinutesBetweenBuyCycle = 1
-AuctionHouseBot.MinutesBetweenSellCycle = 1
+AuctionHouseBot.MinutesBetweenBuyCycle = 5:15
+AuctionHouseBot.MinutesBetweenSellCycle = 5:15
 AuctionHouseBot.EnableSeller = true
 AuctionHouseBot.ReturnExpiredAuctionItemsToBot = false
 AuctionHouseBot.GUIDs = 0
