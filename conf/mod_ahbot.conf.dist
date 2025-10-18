@@ -560,7 +560,7 @@ AuctionHouseBot.AdvancedPricing.Misc.Mount.Enabled              = true
 
 # Broad category multipliers
 AuctionHouseBot.PriceMultiplier.Category.Consumable = 1
-AuctionHouseBot.PriceMultiplier.Category.Container = 1
+AuctionHouseBot.PriceMultiplier.Category.Container = 2
 AuctionHouseBot.PriceMultiplier.Category.Weapon = 2
 AuctionHouseBot.PriceMultiplier.Category.Gem = 1
 AuctionHouseBot.PriceMultiplier.Category.Armor = 2
@@ -578,12 +578,12 @@ AuctionHouseBot.PriceMultiplier.Category.Glyph = 1
 # Broad quality multipliers
 AuctionHouseBot.PriceMultiplier.Quality.Poor = 1
 AuctionHouseBot.PriceMultiplier.Quality.Normal = 1
-AuctionHouseBot.PriceMultiplier.Quality.Uncommon = 1.8
-AuctionHouseBot.PriceMultiplier.Quality.Rare = 1.9
-AuctionHouseBot.PriceMultiplier.Quality.Epic = 2.1
-AuctionHouseBot.PriceMultiplier.Quality.Legendary = 3
-AuctionHouseBot.PriceMultiplier.Quality.Artifact = 3
-AuctionHouseBot.PriceMultiplier.Quality.Heirloom = 3
+AuctionHouseBot.PriceMultiplier.Quality.Uncommon = 2
+AuctionHouseBot.PriceMultiplier.Quality.Rare = 4
+AuctionHouseBot.PriceMultiplier.Quality.Epic = 8
+AuctionHouseBot.PriceMultiplier.Quality.Legendary = 16
+AuctionHouseBot.PriceMultiplier.Quality.Artifact = 16
+AuctionHouseBot.PriceMultiplier.Quality.Heirloom = 16
 
 # Category item level multiplier (item itemlevel x this value, 0 = disabled)
 AuctionHouseBot.PriceMultiplier.ItemLevel.Category.Consumable = 0
