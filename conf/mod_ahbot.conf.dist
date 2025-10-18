@@ -560,7 +560,7 @@ AuctionHouseBot.AdvancedPricing.Misc.Mount.Enabled              = true
 
 # Broad category multipliers
 AuctionHouseBot.PriceMultiplier.Category.Consumable = 1
-AuctionHouseBot.PriceMultiplier.Category.Container = 2
+AuctionHouseBot.PriceMultiplier.Category.Container = 1
 AuctionHouseBot.PriceMultiplier.Category.Weapon = 2
 AuctionHouseBot.PriceMultiplier.Category.Gem = 1
 AuctionHouseBot.PriceMultiplier.Category.Armor = 2
