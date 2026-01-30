@@ -49,6 +49,9 @@ AuctionHouseBot::AuctionHouseBot() :
     CyclesBetweenSellAction(1),
     CyclesBetweenSellActionMax(1),
     MaxBuyoutPriceInCopper(1000000000),
+    CompleteItemValueOverrideEnabled(false),
+    CompleteItemValueOverrideDoApplyBidVariations(false),
+    CompleteItemValueOverrideDoApplyBuyoutVariations(false),
     BuyoutVariationReducePercent(0.15f),
     BuyoutVariationAddPercent(0.25f),
     BidVariationHighReducePercent(0),
@@ -243,6 +246,29 @@ uint32 AuctionHouseBot::GetStackSizeForItem(ItemTemplate const* itemProto) const
 
 void AuctionHouseBot::CalculateItemValue(ItemTemplate const* itemProto, uint64& outBidPrice, uint64& outBuyoutPrice)
 {
+    if (CompleteItemValueOverrideEnabled == true)
+    {
+        auto it = CompleteItemValueOverrideItemListByItemID.find(itemProto->ItemId);
+        if (it != CompleteItemValueOverrideItemListByItemID.end())
+        {
+            outBuyoutPrice = it->second;
+            if (CompleteItemValueOverrideDoApplyBuyoutVariations == true)
+                outBuyoutPrice = urand(outBuyoutPrice * (1.0f - BuyoutVariationReducePercent), outBuyoutPrice * (1.0f + BuyoutVariationAddPercent));
+
+            if (CompleteItemValueOverrideDoApplyBidVariations == true)
+            {
+                float sellVarianceBidPriceTopPercent = 1.0f - BidVariationHighReducePercent;
+                float sellVarianceBidPriceBottomPercent = 1.0f - BidVariationLowReducePercent;
+                outBidPrice = urand(sellVarianceBidPriceBottomPercent * outBuyoutPrice, sellVarianceBidPriceTopPercent * outBuyoutPrice);
+            }
+            else
+                outBidPrice = outBuyoutPrice;
+
+            return;
+        }
+    }
+
+
     // Start with a buyout price related to the sell price, if configured
     if (UseItemSellPriceIfHigherThanPriceMinimumCenterBase == true)
         outBuyoutPrice = itemProto->SellPrice;
@@ -1843,6 +1869,12 @@ void AuctionHouseBot::InitializeConfiguration()
 
     string charString = sConfigMgr->GetOption<std::string>("AuctionHouseBot.GUIDs", "0");
     AddCharacters(charString);
+
+    // Top level overrides
+    CompleteItemValueOverrideEnabled = sConfigMgr->GetOption<bool>("AuctionHouseBot.CompleteItemValueOverride.Enabled", false);
+    AddItemValuePairsToItemIDMap(CompleteItemValueOverrideItemListByItemID, sConfigMgr->GetOption<std::string>("AuctionHouseBot.CompleteItemValueOverride.ItemsList", ""));
+    CompleteItemValueOverrideDoApplyBidVariations = sConfigMgr->GetOption<bool>("AuctionHouseBot.CompleteItemValueOverride.DoApplyBidVariations", false);
+    CompleteItemValueOverrideDoApplyBuyoutVariations = sConfigMgr->GetOption<bool>("AuctionHouseBot.CompleteItemValueOverride.DoApplyBuyoutVariations", false);
 
     // Buyer & Seller core properties
     SetCyclesBetweenBuyOrSell();

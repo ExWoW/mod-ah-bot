@@ -136,6 +136,10 @@ private:
     uint32 CyclesBetweenSellAction;
     uint32 CyclesBetweenSellActionMax;
     uint32 MaxBuyoutPriceInCopper;
+    bool CompleteItemValueOverrideEnabled;
+    std::unordered_map<uint32, uint64> CompleteItemValueOverrideItemListByItemID;
+    bool CompleteItemValueOverrideDoApplyBidVariations;
+    bool CompleteItemValueOverrideDoApplyBuyoutVariations;
     float BuyoutVariationReducePercent;
     float BuyoutVariationAddPercent;
     float BidVariationHighReducePercent;
