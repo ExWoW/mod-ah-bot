@@ -90,7 +90,7 @@ AuctionHouseBot.ListingExpireTimeInSecondsMax = 86400
 #        honered.
 #    Default: false (disabled)
 #
-#    AuctionHouseBot.CompleteItemValueOverride.ItemsList
+#    AuctionHouseBot.CompleteItemValueOverride.Items
 #        Comma separated list of items in the format of "itemID:PriceMinCopper"
 #        which represents exact item prices of items not factoring for any
 #        math at all in the listing's price value being calculated
@@ -106,7 +106,7 @@ AuctionHouseBot.ListingExpireTimeInSecondsMax = 86400
 ###############################################################################
 
 AuctionHouseBot.CompleteItemValueOverride.Enabled = false
-AuctionHouseBot.CompleteItemValueOverride.ItemsList = 
+AuctionHouseBot.CompleteItemValueOverride.Items = 
 AuctionHouseBot.CompleteItemValueOverride.DoApplyBidVariations = false
 AuctionHouseBot.CompleteItemValueOverride.DoApplyBuyoutVariations = false
 
