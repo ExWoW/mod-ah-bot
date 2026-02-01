@@ -99,7 +99,7 @@ AuctionHouseBot.ListingExpireTimeInSecondsMax = 86400
 #    AuctionHouseBot.CompleteItemValueOverride.DoApplyBidVariations
 #    AuctionHouseBot.CompleteItemValueOverride.DoApplyBuyoutVariations
 #        If true, the variables such as BuyoutVariation* and BidVariation*
-#        blow will apply to prices set by CompleteItemBuySellPriceOverride
+#        below will apply to prices set by CompleteItemBuySellPriceOverride
 #    Default: false
 ###############################################################################
 
