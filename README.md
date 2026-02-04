@@ -1,4 +1,4 @@
-## Description
+## Auction Bot Plus
 
 This is a fork of the auction house bot for AzerothCore.  This fork gives a much more blizzlike experience in the offerings on the auction house, and it is built with the following ethos: "Maximum understandable customization in the hands of admins via non-SQL configurations".  Here are some of the feature highlights:
  - All configuration is done via config files, with no SQL configuration needed
@@ -27,7 +27,6 @@ Requires an AzerothCore version that is caught up to at least change set 3f46e05
 Notes:
 - These accounts do not need any security level and can be a player accounts.
 - The characters used by the ahbot are not meant to be used ingame. If you use it to browse the auction house, you might have issues like "Searching for items..." displaying forever.
-- Important!  By default, most player crafted items (except glyphs, bolts, maybe a few other things) are disabled from showing up in the auction house in order to encourage player crafting on lower pop servers.  If you want different behavior, alter the config variable "AuctionHouseBot.DisabledCraftedItemIDs" by deleting IDs you wish to show up.  Note that fish are also disabled to encourage fishing, and that's also managed by disabled lists.
 - It takes a few hours for the auction house to fully populate, as only 75 items gets added by default every 'tick'.  You can change this in the config with the AuctionHouseBot.ItemsPerCycle variable.
 - All price multpliers (along with the advanced pricing, see config) are applied multiplicative.  Example: A Category of 1.5x, Quality of 2x, and CategoryQuality of 1.4x would make the multiplier 4.2 (1.5 x 2 x 1.4).  The advanced pricing would then multiply that value further.  Using item level price multpliers, which create a multiplier of itemlevel x value, is also multiplicitive along with the others.  You cannot use item level price multipliers and advanced pricing, as advanced pricing will take priority between the two.
 - Bot-listed prices will not exceed 100k gold buyout.  This can be reduced via the configuration if you want.
@@ -46,10 +45,16 @@ The AuctionHouseBot module adds the following in-game commands (for GMs only):
 ## Buying Bot Behavior
 
 1. **Determining Items to Buy:** Every minute the buyer bot will select (BuyCandidatesPerBuyCycle) items currently up for auction which are listed by players as potential purchase items.
-2. **Price Willing to Pay:** The buyer bot will use the same item price calculation the seller bot uses, including the random +/- 25%, and that calculated price is then multiplied by (AcceptablePriceModifier) which then becomes the price the buyer will be willing to spend.
+2. **Price Willing to Pay:** The buyer bot will use the same item price calculation the seller bot uses, including the random +/- 25% (configurable), and that calculated price is then multiplied by (AcceptablePriceModifier) which then becomes the price the buyer will be willing to spend.
 3. **Buying it:** If the price calculated is higher than the buy out price, then the bot will buy it out.  If not, it will test to see if it has been bidded on by a bot and if not, if the bid price is below the price it is willing to pay.  If so, it will bid (outbid, so just over current bid).
 
 The above behavior is replicated on each enabled auction house.  If left to default settings, 1 item in each auction house will attempt to be bought from, if the price calculation seems favorable. Note that any item buy attempt, even items above buying price, consumes a buy candidate. That means that too many overpriced items can drown out potential sales.
+
+
+## Additional Resources
+
+[Advanced Pricing Calculator](tools/AdvancedPricingCalculator/Advanced_Pricing_Calculator.xlsx) - If `AuctionHouseBot.AdvancedPricing.<Category>.<Subclass>.Enabled` is enabled, this spreadsheet can help quickly visualize how config settings affect in-game prices.
+
 
 ## Credits
 
